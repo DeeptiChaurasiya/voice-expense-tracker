@@ -1,4 +1,5 @@
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5001";
 import { useEffect, useState } from "react";
 import "./App.css";
 
@@ -43,7 +44,7 @@ function App() {
 
   const fetchExpenses = async () => {
     try {
-      const response = await fetch("http://localhost:5001/api/expenses");
+      const response = await fetch(`${API_URL}/api/expenses`);
       if (!response.ok) throw new Error("Could not fetch expenses");
       const data = await response.json();
       setExpenses(data);
@@ -67,7 +68,7 @@ function App() {
     try {
       setLoading(true);
 
-      const response = await fetch("http://localhost:5001/api/expenses", {
+      const response = await fetch(`${API_URL}/api/expenses`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -96,7 +97,7 @@ function App() {
 
     try {
       const response = await fetch(
-        `http://localhost:5001/api/expenses/${id}`,
+        `${API_URL}/api/expenses/${id}`,
         { method: "DELETE" }
       );
 
@@ -113,7 +114,7 @@ function App() {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:5001/api/voice/expense",
+        `${API_URL}/api/voice/expense`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
